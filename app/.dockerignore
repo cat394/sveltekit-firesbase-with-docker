@@ -1,0 +1,24 @@
+# Node.js 関連（ローカルの node_modules はコンテナ内で再インストールする）
+node_modules
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
+
+# ビルド済みの出力（Docker内でビルドするため不要）
+build
+.svelte-kit
+
+# 環境変数ファイル（セキュリティ対策）
+.env
+.env.local
+.env.*.local
+
+# エディター・OSの不要ファイル
+*.swp
+*.swo
+*.swn
+*.log
+.DS_Store
+Thumbs.db
+.idea
+.vscode
