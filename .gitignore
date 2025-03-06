@@ -1,0 +1,4 @@
+/firebase/*
+
+!/firebase/firebase.json
+!/firebase/.gitignore

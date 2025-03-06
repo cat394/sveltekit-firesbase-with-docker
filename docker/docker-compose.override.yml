@@ -23,6 +23,12 @@ services:
       - "8085:8085" # Datastore Emulator
       - "9099:9099" # Authentication Emulator
       - "9199:9199" # Cloud Storage Emulator
+    volumes:
+      - ../firebase:/firebase
+      - /firebase/functions/node_modules
+      - ../firebase/firebase-service-account.json:/firebase/firebase-service-account.json
     environment:
-      - FIRESTORE_EMULATOR_HOST=0.0.0.0:8080
-      - FIREBASE_AUTH_EMULATOR_HOST=0.0.0.0:9099
+      - "GOOGLE_APPLICATION_CREDENTIALS=/firebase/firebase-service-account.json"
+      - "FIREBASE_FIRESTORE_EMULATOR_HOST=0.0.0.0:8080"
+      - "FIREBASE_AUTH_EMULATOR_HOST=0.0.0.0:9099"
+      - "FIREBASE_CLOUD_STORAGE_EMULATOR_HOST=0.0.0.0:9199"
