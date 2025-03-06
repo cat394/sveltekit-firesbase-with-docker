@@ -16,7 +16,13 @@ Docker Compose ですぐに開発環境を構築できます。
 
 ## Docker コンテナの起動：
 
-以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
+まずは、Docker 関連のファイルがあるディレクトリに移動します。
+
+```bash
+cd docker
+```
+
+そして、以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
 
 ```bash
 docker compose up　--build
