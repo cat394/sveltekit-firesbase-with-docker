@@ -16,11 +16,27 @@ Docker Compose ですぐに開発環境を構築できます。
 
 ## Docker コンテナの起動：
 
-まずは、Docker 関連のファイルがあるディレクトリに移動します。
+1. `firebase`ディレクトリに移動します。
 
-```bash
-cd docker
-```
+  ```bash
+  cd firebase
+  ```
+
+2. Firebase を初期化します
+
+  ```bash
+  firebase init
+  ```
+
+3. `firebase.json`の`ui`プロパティを以下のように設定します。
+
+  ```json
+      "ui": {
+        "host": "0.0.0.0",
+        "enabled": true,
+        "port": 4000
+      },
+  ```
 
 そして、以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
 
@@ -59,4 +75,4 @@ docker compose -f docker-compose.yml up --build
 
 ## ライセンス
 
-このプロジェクトはMITライセンスのもとで提供されています。
+このプロジェクトは MIT ライセンスのもとで提供されています。
