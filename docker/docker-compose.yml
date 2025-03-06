@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: prod
+    ports:
+      - "3000:3000"
+    depends_on:
+      - firebase
+
+  firebase:
+    build:
+      context: ..
+      dockerfile: docker/firebase.Dockerfile
+    ports:
+      - "4000:4000" # Firebase Emulator UI
+      - "4500:4500" # Firebase Pub/Sub
+      - "8080:8080" # Firestore Emulator
+      - "8085:8085" # Datastore Emulator
+      - "9099:9099" # Authentication Emulator
+      - "9199:9199" # Cloud Storage Emulator
+    environment:
+      - FIRESTORE_EMULATOR_HOST=0.0.0.0:8080
+      - FIREBASE_AUTH_EMULATOR_HOST=0.0.0.0:9099
+
+volumes:
+  app:

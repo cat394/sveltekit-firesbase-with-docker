@@ -3,16 +3,16 @@ FROM node:20 AS dev
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
-COPY . .
+COPY ../app/ ./
 EXPOSE 5173
 CMD ["npm", "run", "dev"]
 
 # 本番環境ビルドステージ
 FROM node:20 AS build
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json app/package-lock.json ./
 RUN npm install
-COPY . .
+COPY ../app/ .
 RUN npm run build
 
 # 本番環境のランタイムステージ
@@ -21,4 +21,3 @@ WORKDIR /app
 COPY --from=build /app/build ./
 EXPOSE 3000
 CMD ["node", "./build"]
-
