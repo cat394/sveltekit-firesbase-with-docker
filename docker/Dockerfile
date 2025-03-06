@@ -1,7 +1,7 @@
 # 開発環境ステージ
 FROM node:20 AS dev
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY ../app/package.json ../app/package-lock.json ./
 RUN npm install
 COPY ../app/ ./
 EXPOSE 5173
