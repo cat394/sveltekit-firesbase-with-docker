@@ -16,9 +16,28 @@ services:
           ignore:
             - ../app/node_modules
 
-  firebase:
+  functions:
+    stdin_open: true
+    tty: true
     build:
       target: dev
+    volumes:
+      - functions-lib:/firebase/functions/lib #Firebase コンテナの/libと共有する
+    develop:
+      watch:
+        - action: rebuild
+          path: ../firebase/functions/src
+        - action: sync
+          path: ../firebase/functions
+          target: ./firebase/functions
+          ignore:
+            - ../firebase/functions/node_modules
+            - ../firebase/functions/lib
+
+  firebase:
+    build:
+      context: ..
+      dockerfile: docker/firebase.Dockerfile
     ports:
       - "4000:4000" # Firebase Emulator UI
       - "4500:4500" # Firebase Pub/Sub
@@ -28,22 +47,12 @@ services:
       - "9199:9199" # Cloud Storage Emulator
       - "5001:5001" # Cloud functions Emulator
     volumes:
-      - /firebase/functions/lib
-    develop:
-      watch:
-        - action: rebuild
-          path: 
-            - ../firebase/package.json
-            - ../firebase/functions/lib
-        - action: sync
-          path: ../firebase/functions
-          target: ./firebase/functions
-          ignore:
-            - ./firebase/functions/node_modules
-
+      - functions-lib:/firebase/functions/lib #Functions コンテナの/libと共有する
     environment:
       - "GOOGLE_APPLICATION_CREDENTIALS=/firebase/firebase-service-account.json"
       - "FIREBASE_FIRESTORE_EMULATOR_HOST=0.0.0.0:8080"
       - "FIREBASE_AUTH_EMULATOR_HOST=0.0.0.0:9099"
       - "FIREBASE_CLOUD_STORAGE_EMULATOR_HOST=0.0.0.0:9199"
       - "FIREBASE_CLOUD_FUNCTIONS_EMULATOR_HOST=0.0.0:5001"
+volumes:
+  functions-lib:

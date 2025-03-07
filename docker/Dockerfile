@@ -18,5 +18,5 @@ RUN npm run build
 # 本番環境のランタイムステージ
 FROM node:20 AS prod
 WORKDIR /app
-COPY --from=build /app/build ./
+COPY --from=build app/build ./
 CMD ["node", "./build"]
