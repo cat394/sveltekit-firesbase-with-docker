@@ -6,6 +6,10 @@ services:
       target: prod
     ports:
       - "3000:3000"
-
-volumes:
-  app:
+  firebase:
+    build:
+      context: ..
+      dockerfile: dockerfile
+      target: prod
+    ports:
+      - "1231:1231"

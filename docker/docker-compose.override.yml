@@ -1,21 +1,24 @@
 services:
   app:
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
       target: dev
     ports:
       - "5173:5173"
-    volumes:
-      - ../app:/app
-      - /app/node_modules
     depends_on:
       - firebase
+    develop:
+      watch:
+        - action: rebuild
+          path: ../app/package.json
+        - action: sync
+          path: ../app
+          target: ./app
+          ignore:
+            - ../app/node_modules
 
   firebase:
     build:
-      context: ..
-      dockerfile: docker/firebase.Dockerfile
+      target: dev
     ports:
       - "4000:4000" # Firebase Emulator UI
       - "4500:4500" # Firebase Pub/Sub
@@ -23,12 +26,24 @@ services:
       - "8085:8085" # Datastore Emulator
       - "9099:9099" # Authentication Emulator
       - "9199:9199" # Cloud Storage Emulator
+      - "5001:5001" # Cloud functions Emulator
     volumes:
-      - ../firebase:/firebase
-      - /firebase/functions/node_modules
-      - ../firebase/firebase-service-account.json:/firebase/firebase-service-account.json
+      - /firebase/functions/lib
+    develop:
+      watch:
+        - action: rebuild
+          path: 
+            - ../firebase/package.json
+            - ../firebase/functions/lib
+        - action: sync
+          path: ../firebase/functions
+          target: ./firebase/functions
+          ignore:
+            - ./firebase/functions/node_modules
+
     environment:
       - "GOOGLE_APPLICATION_CREDENTIALS=/firebase/firebase-service-account.json"
       - "FIREBASE_FIRESTORE_EMULATOR_HOST=0.0.0.0:8080"
       - "FIREBASE_AUTH_EMULATOR_HOST=0.0.0.0:9099"
       - "FIREBASE_CLOUD_STORAGE_EMULATOR_HOST=0.0.0.0:9199"
+      - "FIREBASE_CLOUD_FUNCTIONS_EMULATOR_HOST=0.0.0:5001"
