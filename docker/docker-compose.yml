@@ -12,3 +12,5 @@ services:
       context: ..
       dockerfile: docker/functions.Dockerfile
       target: prod
+    ports:
+      - "1231:1231"
