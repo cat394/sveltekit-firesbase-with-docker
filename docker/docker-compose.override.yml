@@ -17,8 +17,6 @@ services:
             - ../app/node_modules
 
   functions:
-    stdin_open: true
-    tty: true
     build:
       target: dev
     volumes:
