@@ -65,7 +65,7 @@ Docker Compose ですぐに開発環境を構築できます。
 
 本番環境のアプリを起動する場合は、`docker-compose.yml` のみを使用します。
 
-本番環境のアプリは`3000`で起動し、また、
+本番環境のアプリは`3000`で起動し、また、functionsは、`1231`で起動します。
 
 ```bash
 docker compose -f docker-compose.yml up --build
