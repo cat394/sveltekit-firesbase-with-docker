@@ -1,8 +1,14 @@
-FROM node:20-alpine
+FROM node:22-alpine
+
 WORKDIR /firebase
+
 RUN npm install -g firebase-tools
+
+# Firebase Functions エミュレーターの依存である Java 17 (OpenJDK 17) をインストール
+# Firestore エミュレーターや Authentication エミュレーターも Java が必要
 RUN apk add openjdk17
+
 COPY firebase/ ./
-COPY docker/firebase-entrypoint.sh /firebase-entrypoint.sh
-RUN chmod +x /firebase-entrypoint.sh
-ENTRYPOINT ["sh", "/firebase-entrypoint.sh"] 
+
+# Firebase エミュレーターを起動し、Firestore, Auth, Storage, Functions のエミュレーターのみを有効化
+CMD ["firebase", "emulators:start", "--only", "firestore,auth,storage,functions"]
