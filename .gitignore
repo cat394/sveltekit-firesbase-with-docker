@@ -1,4 +1,6 @@
+/app/*
 /firebase/*
 
+!/app/.dockerignore
 !/firebase/firebase.json
 !/firebase/.gitignore
