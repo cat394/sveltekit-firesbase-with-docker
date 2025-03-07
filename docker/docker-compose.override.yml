@@ -47,10 +47,10 @@ services:
     volumes:
       - functions-lib:/firebase/functions/lib #Functions コンテナの/libと共有する
     environment:
-      - "GOOGLE_APPLICATION_CREDENTIALS=/firebase/firebase-service-account.json"
       - "FIREBASE_FIRESTORE_EMULATOR_HOST=0.0.0.0:8080"
       - "FIREBASE_AUTH_EMULATOR_HOST=0.0.0.0:9099"
       - "FIREBASE_CLOUD_STORAGE_EMULATOR_HOST=0.0.0.0:9199"
       - "FIREBASE_CLOUD_FUNCTIONS_EMULATOR_HOST=0.0.0:5001"
+      
 volumes:
   functions-lib:
