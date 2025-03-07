@@ -16,33 +16,25 @@ Docker Compose ですぐに開発環境を構築できます。
 
 ## Docker コンテナの起動：
 
-1. `firebase`ディレクトリを作成し、移動します。
+1. `/firebase`ディレクトリへ移動します。
 
   ```bash
   cd firebase
   ```
 
-2. Firebase を初期化します
+2. Firebase を初期化します。
 
   ```bash
   firebase init
   ```
 
-3. `firebase.json`の`ui`プロパティを以下のように設定します。
+3. Firebase のコンソールから取得できるサービスアカウントキーを`/firebase`ディレクトリに入れます。
 
-  ```json
-      "ui": {
-        "host": "0.0.0.0",
-        "enabled": true,
-        "port": 4000
-      },
+5. 以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
+
+  ```bash
+  docker compose up --build --watch
   ```
-
-そして、以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
-
-```bash
-docker compose up --build
-```
 
 コンテナが起動すると、以下のサービスが利用可能になります。
 
@@ -55,7 +47,7 @@ docker compose up --build
 
 1. **SvelteKit アプリの開発**
 
-通常の SvelteKit プロジェクトと同じように、`src/` フォルダ内のファイルを編集してください。
+通常の SvelteKit プロジェクトと同じように、`app` フォルダ内のファイルを編集してください。
 
 ホットリロードが有効になっているため、変更を保存すると自動的にリロードされます。
 
@@ -67,7 +59,7 @@ Firestore や Authentication のテストをローカルで行う際は、エミ
 
 ## 本番環境を起動する
 
-本番環境を起動する場合は、`docker-compose.yml のみを使用します。
+本番環境のアプリを起動する場合は、`docker-compose.yml` のみを使用します。
 
 ```bash
 docker compose -f docker-compose.yml up --build
