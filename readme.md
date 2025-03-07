@@ -2,7 +2,7 @@
 
 このプロジェクトは、SvelteKit と Firebase を組み合わせた開発環境のテンプレートです。
 
-多少の Docker の知識があれば、SvelteKit ではなくとも、Firebase エミュレーターを使う多くのプロジェクトで利用できます。 
+多少の Docker の知識があれば、SvelteKit ではなくとも、Firebase エミュレーターを使う多くのプロジェクトで利用できます。
 
 Docker Compose ですぐに開発環境を構築できます。
 
@@ -18,12 +18,12 @@ Docker Compose ですぐに開発環境を構築できます。
 
 ## Docker コンテナの起動：
 
-1. `/app`ディレクトリ下に、SvelteKitプロジェクトを作成します。
+1. `/app`ディレクトリ下に、SvelteKit プロジェクトを作成します。
 
-  ```bash
-  cd app
-  npx sv create ./
-  ```
+   ```bash
+   cd app
+   npx sv create ./
+   ```
 
 2. `/firebase`ディレクトリへ移動し、Firebase を初期化します。
 
@@ -32,20 +32,20 @@ Docker Compose ですぐに開発環境を構築できます。
    firebase init
    ```
 
-4. Firebase のコンソールから取得できるサービスアカウントキーを`/firebase`ディレクトリに入れます。
+3. Firebase のコンソールから取得できるサービスアカウントキーを`/firebase`ディレクトリに入れます。
 
-5. 以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
+4. 以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
 
    ```bash
    docker compose up --build --watch
    ```
 
-コンテナが起動すると、以下のサービスが利用可能になります。
+   コンテナが起動すると、以下のサービスが利用可能になります。
 
-| サービス名              | URL                    |
-| ----------------------- | ---------------------- |
-| SvelteKit アプリ        | https://localhost:5173 |
-| Firebase エミュレーター | http://127.0.0.1:4000  |
+   | サービス名              | URL                    |
+   | ----------------------- | ---------------------- |
+   | SvelteKit アプリ        | https://localhost:5173 |
+   | Firebase エミュレーター | http://127.0.0.1:4000  |
 
 ## 開発する
 
@@ -69,7 +69,7 @@ Docker Compose ですぐに開発環境を構築できます。
 
 本番環境のアプリを起動する場合は、`docker-compose.yml` のみを使用します。
 
-本番環境のアプリはポート`3000`で起動します。functionsは、ポート`1231`で起動します。
+本番環境のアプリはポート`3000`で起動します。functions は、ポート`1231`で起動します。
 
 ```bash
 docker compose -f docker-compose.yml up --build
