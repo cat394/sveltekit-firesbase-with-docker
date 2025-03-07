@@ -32,9 +32,7 @@ Docker Compose ですぐに開発環境を構築できます。
    firebase init
    ```
 
-3. Firebase のコンソールから取得できるサービスアカウントキーを`/firebase`ディレクトリに入れます。
-
-4. 以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
+3. 以下のコマンドを実行して、Firebase エミュレーターと SvelteKit アプリを起動します。
 
    ```bash
    cd ../docker
